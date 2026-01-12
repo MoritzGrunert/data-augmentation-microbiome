@@ -1,0 +1,55 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python / Jupyter
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Outputs / results (optional)
+outputs/
+results/
+
+# LaTeX (only build artefacts)
+paper/**/*.aux
+paper/**/*.lof
+paper/**/*.log
+paper/**/*.lot
+paper/**/*.fls
+paper/**/*.out
+paper/**/*.toc
+paper/**/*.fmt
+paper/**/*.fot
+paper/**/*.cb
+paper/**/*.cb2
+paper/**/.*.lb
+
+paper/**/*.bbl
+paper/**/*.bcf
+paper/**/*.blg
+paper/**/*-blx.aux
+paper/**/*-blx.bib
+paper/**/*.run.xml
+
+paper/**/*.fdb_latexmk
+paper/**/*.synctex
+paper/*.synctex.gz
+paper/*.synctex(busy)
+paper/**/*.pdfsync
+
+latex.out/
+paper/build/
+paper/main.pdf

@@ -1,0 +1,41 @@
+% do not change this file
+\pdfbookmark[0]{\IfLanguageName{ngerman}{Titelseite}{Front Page}}{frontpage}
+\begin{titlepage}
+  \centering
+  \includegraphics[width=10cm]{static/wwu-logo-rgb.pdf}\\
+
+  \vfill
+  \huge
+  \thesistitle{}\\*[40pt]
+  \normalsize
+
+  \vfill
+  \large
+  \thesistype{}\\[0.25em]
+  \normalsize
+  \IfLanguageName{ngerman}{von}{by}\\
+  \Large
+  \thesisauthor{}\\
+
+  \vspace{5mm}
+  \normalsize
+  \IfLanguageName{ngerman}{aus}{born in}\\
+  \thesisauthorbirthplace{}\\[1cm]
+
+  \if\professor\jiang
+    \IfLanguageName{ngerman}{vorgelegt am}{submitted to}\\[5mm]
+    \IfLanguageName{ngerman}{Head of the Pattern Recognition and Image Analysis group}{Head of the Pattern Recognition and Image Analysis group}\\
+    Prof.\ Dr.\ Xiaoyi Jiang\\
+  \else
+    \if\professor\heider
+      \IfLanguageName{ngerman}{vorgelegt bei}{submitted to}\\[5mm]
+      \IfLanguageName{ngerman}{Professorship Machine Learning for Medical Data}{Professorship Machine Learning for Medical Data}\\
+      Prof.\ Dr.\ Dominik Heider\\
+    \fi
+  \fi
+
+  \IfLanguageName{ngerman}{Universität Münster}{University of Münster}\\[0.5cm]
+  \DTMmonthname{\thesissubmissionmonth} \thesissubmissionyear{}\\[0.5cm]
+  \IfLanguageName{ngerman}{Betreuer}{Supervisor}:\\
+  \thesissupervisor{}
+\end{titlepage}

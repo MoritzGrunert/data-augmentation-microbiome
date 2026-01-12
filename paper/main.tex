@@ -1,0 +1,213 @@
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+
+\documentclass[
+  12pt,
+  a4paper,
+  twoside=false,% twoside=true zum Drucken
+  BCOR=12mm,
+  DIV=14,
+  headsepline,
+  cleardoublepage=empty,
+  chapterprefix,
+  parskip,
+  pointlessnumbers,
+  listof=totoc,
+  index=totoc,
+  bibliography=totoc
+]{scrbook}
+
+% ----------------------------
+% Language & typography
+% ----------------------------
+\usepackage[ngerman,english]{babel}
+\usepackage{iflang}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} % OK for pdfLaTeX (your current setup)
+
+\usepackage[babel]{csquotes}
+
+% Fonts (Times/Helvetica/Courier)
+\usepackage{mathptmx}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{courier}
+
+% ----------------------------
+% Math / tables / graphics
+% ----------------------------
+\usepackage{amsmath, amsfonts, amstext}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{lscape}
+
+% Replace deprecated subfigure with subcaption
+\usepackage{subcaption}
+
+% Units
+\usepackage[
+  binary-units=true,
+  per-mode=symbol,
+  exponent-product=\cdot,
+  range-units=single,
+  exponent-to-prefix=true,
+  zero-decimal-to-integer=true,
+  list-units=single
+]{siunitx}
+
+% ----------------------------
+% Algorithms / code listings
+% ----------------------------
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{listings}
+\usepackage[chapter]{minted} % requires --shell-escape (already set)
+
+% ----------------------------
+% Utilities
+% ----------------------------
+\usepackage[calc]{datetime2}
+\usepackage{setspace}
+\usepackage{makeidx}
+\usepackage{nomencl}
+\usepackage{todonotes}
+
+% Avoid URL hyphenation issues
+\PassOptionsToPackage{hyphens}{url}
+
+% ----------------------------
+% Bibliography
+% ----------------------------
+\usepackage[
+  style=numeric,
+  sorting=none,
+  backend=bibtex % keep as-is for your current workflow
+]{biblatex}
+\addbibresource{bib/example.bib}
+
+% ----------------------------
+% Hyperref / cleveref (load hyperref late)
+% ----------------------------
+\usepackage[plainpages=false,pdfpagelabels]{hyperref}
+
+% cleveref language should follow babel; avoid forcing english
+\usepackage{cleveref}
+
+% ----------------------------
+% Custom warnings for bad environments
+% ----------------------------
+\makeatletter
+\def\displaymath{\typeout{*** Do not use DISPLAYMATH. Use \string\[...\string] instead ***}}
+\def\eqnarray{\typeout{*** Do not use EQNARRAY(*). Use align(*)-environment instead ***}}
+\makeatother
+
+% ----------------------------
+% Metadata (your template)
+% ----------------------------
+\def\heider{0}
+\def\jiang{1}
+
+\input{thesis_meta}
+
+\IfLanguageName{ngerman}{
+  \newcommand{\thesistype}{\graduationlevel{}arbeit}
+}{
+  \newcommand{\thesistype}{\graduationlevel{}'s Thesis}
+}
+\newcommand{\thesistypegerman}{\graduationlevel{}arbeit}
+
+\hypersetup{
+  pdftitle={\thesistitle{}},
+  pdfsubject={\thesistype{}},
+  pdfauthor={\thesisauthor{}},
+  pdfkeywords={\thesiskeywords{}},
+  colorlinks=false,
+  bookmarksnumbered=true
+}
+
+\DefineBibliographyStrings{ngerman}{%
+  mathesis = {Masterarbeit},
+  bathesis = {Bachelorarbeit},
+  phdthesis = {Dissertation}
+}
+\DefineBibliographyStrings{english}{%
+  mathesis = {Master's Thesis},
+  bathesis = {Bachelor's Thesis},
+  phdthesis = {PhD Thesis}
+}
+
+% ----------------------------
+% Index
+% ----------------------------
+\listfiles
+\makeindex
+
+% ----------------------------
+% Document
+% ----------------------------
+\begin{document}
+\onehalfspacing
+
+\frontmatter
+
+\input{static/titlepage}
+\cleardoublepage
+
+\input{sections/01_abstract}
+\cleardoublepage
+
+\pdfbookmark[0]{\contentsname}{content}
+\tableofcontents
+
+% Optional lists — comment out if not needed
+\listoffigures
+\listoftables
+% \listoflistings
+
+\mainmatter
+\cleardoublepage
+
+% ----------------------------
+% Main sections
+% ----------------------------
+\input{sections/02_introduction}
+\cleardoublepage
+
+\input{sections/03_background}
+\cleardoublepage
+
+\input{sections/04_federatedEdgeLearning}
+\cleardoublepage
+
+\input{sections/05_materials}
+\cleardoublepage
+
+\input{sections/06_results}
+\cleardoublepage
+
+\input{sections/07_discussion}
+\cleardoublepage
+
+\input{sections/08_conclusion}
+\cleardoublepage
+
+% Appendix (comment out if not needed)
+\input{sections/09_anhang}
+
+% ----------------------------
+% Back matter
+% ----------------------------
+\backmatter
+
+\printbibliography
+\cleardoublepage
+
+\printindex
+
+\input{static/declaration}
+
+\end{document}

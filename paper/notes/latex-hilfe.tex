@@ -1,0 +1,156 @@
+% !TeX root = master.tex
+% !TeX spellcheck = de_DE
+
+\chapter{Hinweise zu \LaTeX}
+
+In dem Kapitel geben wir ein paar kleine Hilfestellungen zu häufigen \LaTeX-Fragen.
+
+\section{Abbildungen, Tabellen und Verweise}
+
+\begin{figure}
+    \centering
+    \includegraphics[height=5cm]{fig/unilogo}
+    \caption{Sprechende Beschreibung der Abbildung}
+    \label{fig:logo}
+\end{figure}
+
+\begin{table}
+    \centering
+    \begin{tabular}{lcc}
+        \toprule
+        Modul   & CP & Semester\\
+        \midrule
+        Progra  & 10 & 1\\
+        Ana I   & 10 & 1\\
+        LA I    & 10 & 1\\
+        \midrule
+        Propgra & 10 & 2\\
+        RA      &  9 & 2\\
+        Ana II  & 10 & 2\\
+        \bottomrule
+    \end{tabular}
+    \caption[Beschreibung der Tabelle]{Beschreibung der Tabelle. Diese Tabelle hat eine recht lange Beschreibung, für das Tabellenverzeichnis wird zusätzlich eine Kurzvariante angegeben.}
+    \label{tab:module}
+\end{table}
+
+Mit den Umgebungen \verb|figure| und \verb|tabular| kann man Abbildungen bzw. Tabellen einbinden, wie zum Beispiel \Cref{fig:logo} und \Cref{tab:module}.
+(Bei englischen Arbeit ist noch die Option \verb|german| von \verb|cleverref| zu entfernen.)
+
+Drei Dinge sollte man beachten:
+\begin{itemize}
+    \item Die Positionierung von Abbildungen und Tabellen übernimmt \LaTeX{} automatisch, und zwar so, dass im Text die kleinsten Lücken entstehen. (\LaTeX{} achtet z.\,B. auch darauf, dass keine Schusterjungen und Hurenkinder entstehen.)
+    \item Das in die Vorlage bereits eingebundenen \verb|booktabs|-Package unterstützt einen dabei, besser aussehden Tabellen zu erstellen.
+          Statt nur \verb|\hline| zu verwenden, bietet dieses Package die drei Befehle \verb|\toprule|, \verb|\midrule| und \verb|\bottomrule|, um die Tabelle einzufassen und einzelne Abschnitte anzugeben.
+    \item Abbildungen und Tabellen (Ausnahme: Anhang) sollten immer im Text referenziert werden, wenn sie das erste Mal relevant werden.
+\end{itemize}
+
+Falls man z.\,B. viele Messungen vorgenommen hat und all diese für die Arbeit relevant sind, kann man Abbildungen in den Anhang auslagern.
+Im \Cref{sec:anhang} befindet sich die wichtige \Cref{fig:logoanhang}.
+
+\section{Literatur}
+Alle wissenschaftliche Literatur, die man verwendet, wird im Literatur-Verzeichnis aufgeführt.
+Dieses wird automatisch von Bibtex erzeugt.
+Dazu muss zunächst ein Eintrag in der Bibliographie-Datenbank im bib-Ordner angelegt werden.
+Man findet z.\,B. mit Google Scho\-lar für wissenschaftliche Veröffentlichungen fertige Zitationsangaben im Bibtex-Format.
+
+Wenn ich eine Veröffentlichung zitiere, sieht das so aus.~\cite{Krauthoff2017a}
+Man kann auch, insbesondere bei längeren Quellen wie Büchern, eine Seitenzahl ergänzen.~\cite[S.~5]{Krauthoff2017a}
+Es ist auch möglich, mehrere Quellen auf einmal zu nennen.\cite{Krauthoff2017a,dun:j:argument-acceptability}
+
+Beachte folgende Punkte:
+\begin{itemize}
+    \item Nur Einträge in der Bibliographie-Datenbank, die auch zitiert werden, erscheinen im Literatur-Verzeichnis.
+    \item Eine Zitationsangabe sollte immer so nah wie möglich an zu belegenden Aussage stehen, d.\,h. nicht immer erst beispielsweise am Ende des Absatzes.
+\end{itemize}
+
+\section{Code-Listings}
+
+Code sollte nur sehr sparsam in der Arbeit selbst stehen.
+Meistens ist es sinnvoller, eine Beschreibung eines komplexeren Algorithmus als Programmablaufplan einzubetten.
+Code sollte nur dann in der Arbeit abgedruckt sein, wenn dieser einen essenziellen Mehrwert bietet (weil es z.\,B. um den Code selbst in der Arbeit geht und nicht um das Verfahren).
+
+Je nach verwendeter Methode gibt es die Möglichkeit, auch Quellcodedateien einzubinden statt den Code direkt in die tex-Datei zu schreiben.
+
+\subsection{listings}
+
+Mit dem Package listings erhält man Code mit schlichter Hervorhebung wie in \Cref{lst:lstlisting}.
+
+\begin{lstlisting}[language=Python, caption=Python-Beispiel, label={lst:lstlisting}]
+def foo(x: int) -> int:
+    return x ** x
+\end{lstlisting}
+
+\subsection{minted}
+
+Mit dem Package minted erhält man buntes Highlighting wie in \Cref{lst:minted}.
+
+\begin{listing}
+\begin{minted}{python}
+def foo(x: int) -> int:
+    return x ** x
+\end{minted}
+\caption[Dasselbe Beispiel nochmal in bunt]{Dasselbe Beispiel nochmal in bunt (wenn man nur listings oder nur minted benutzt, dann ist die Nummerierung auch richtig)}
+\label{lst:minted}
+\end{listing}
+
+
+
+Damit das Highlighting mit dieser Methode richtig funktioniert, muss das Python-Programm Pygments installiert sein und \texttt{pdflatex} mit der Option \texttt{-{}-shell-escape} gestartet werden.
+
+Wenn man dieses Package nicht verwendet, kann man es in der master.tex entfernen und muss Pygments nicht installieren.
+
+\section{Silbentrennung}
+
+Die Silbentrennung am Satzende erfolgt automatisch bei langen Wörtern.
+Falls ein Wort bereits einen Bindestrich besitzt, erfolgt die Trennung nur an diesem Bindestrich, z.\,B. Rechnerarchitektur-Aufgabenblatt.
+Das sieht natürlich nicht schön aus (und erzeugt eine Compiler"=Warnung), und kann behoben werden, indem man \verb|"=| anstelle des Bindestrichs verwendet: Rechnerarchitektur"=Aufgabenblatt.\footnote{siehe \url{https://tex.stackexchange.com/questions/26174/allow-line-break-but-without-inserting-a-dash/26191\#26191} für weitere Informationen zu Bindestrichen}
+
+\section{Typographie}
+
+Absätze werden in \LaTeX{} durch eine Leerzeile begonnen.
+Immer wenn ein neuer Gedanke beginnt, sollte auch ein Absatz beginnen.
+In einer Abschlussarbeit gibt es in der Regel keine Abschnitts"=Ebene zwischen Satz und Absatz.\\
+Benutze keine \verb|\\|, um einen neuen Absatz zu beginnen.
+Damit erzeugt man nur einen Zeilenumbruch, aber keinen dynamischen Zwischenraum zwischen den Absätzen.
+Dieser Zwischenraum wird von \LaTeX{} verwendet, um Seiten bündig bis unten zu befüllen.
+(Siehst du, wie der Abstand zum vorherigen „Absatz“ kleiner ist als zum folgenden?)
+
+Um Text kursiv hervorzuheben, sollte eigentlich immer \verb|emph| verwendet werden, \emph{denn ein emph \emph{in einem emph} hebt sich wieder auf}.
+
+Benutze deutsche „typographische“ Anführungszeichen.
+Benutze keine ``englischen'' Anführungszeichen.
+Die "`deutsche"' Variante kann man \verb|"`so"'| oder auch direkt \verb|„so“| als Unicode"=Zeichen\footnote{unter Linux AltGr+V/B} eingeben.
+Manche Editoren können auch so eingestellt werden, dass beim Drücken der \verb|"|-Taste automatisch die typographischen Anführungszeichen eingefügt werden.
+
+Zwischen mehrteiligen Abkürzungen sollte ein schmales, geschütztes Leerzeichen \verb|\,| stehen. So wird verhindert, dass an dieser Stelle ein unerwünschter Zeilenumbruch erfolgt, z. B. hier.
+Auch vor einem \%-Zeichen steht ein Leerzeichen: $5\,\%$.
+
+Ein schmales, geschütztes Leerzeichen wird außerdem im Blocksatz weniger breit gestreckt. Das kann xxxxxxxx man z. B. (falsch) hier vergleichen z.\,B. (richtig) xxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.
+
+Zahlen sollten immer in eine Mathe-Umgebung gesetzt werden, da sich das Rendering gegenüber Fließtext leicht ändert, insbesondere beim Minuszeichen (das als Minuszeichen und nicht als Bindestrich angezeigt wird):
+
+\begin{itemize}
+    \item richtig: $-0,3$, $+1,3$
+    \item falsch: -0,3, +1,3
+\end{itemize}
+
+Alterrnativ kann man auch den Befehl \verb|\num{…}| aus dem \verb|siunitx|-Package verwenden. Dieser stellt Zahlen einheitlich und mit den Korrekten Abständen dar:
+\verb|\num{100}|, \verb|\num{1e2}|, \verb|\num{31415e-4}| werden als \num{100}, \num{1e2}, \num{31415e-4} dargestellt.
+
+Zusammen mit Einheiten kann der Befehl \verb|\SI{<number>}{<unit>}| verwendet werden: \verb|\SI{5}{\percent}| wird als \SI{5}{\percent} dargestellt.
+Damit lassen sich auch komplexere Größen einfach ausdrücken: \SI{100}{\kilo\byte\per\second} kann als \verb|\SI{100}{\kilo\byte\per\second}| angegeben werden. Diese Schreibweise enthält direkt erkennbar den Unterschied zwischen Bit und Byte und das korrekte, geschützte Leerzeichen.
+
+\section{Grammatikprüfung}
+
+Manche Editoren (z.\,B. TeXstudio) bieten eine Grammatikprüfung mithilfe von LanguageTool\footnote{\url{https://languagetool.org/}, die kostenlose Version ist ausreichend} an.
+Damit fallen Tippfehler wie \emph{*das selbe}, \emph{*das Ergebnisse} usw. sofort auf.
+
+\section{Doppelseitiger Druck}
+
+Falls man die Arbeit drucken lassen möchte, empfiehlt sich ein doppelseitiger Druck.
+Damit die innen liegenden Ränder breit genug für die Bindung sind und Seitenzahlen außen stehen, sollte dazu \verb|twoside=true| in der ersten Zeile der master-Datei gesetzt werden.
+Beachte, dass dann zusätzliche Leerseiten entstehen können, da Kapitel immer auf einer rechten Seite begonnen werden.
+
+Seit der Prüfungsordnung 2016 ist es nicht mehr erforderlich, eine gedruckte Fassung abzugeben.
+Die Abgabe erfolgt per PDF-Upload im Studierendenportal.
+Bei der Abgabe als PDF muss die Ehrenwörtliche Erklärung nicht unterschrieben werden; eine analoge Erklärung wird im Zuge des Upload"=Prozesses abgegeben.
