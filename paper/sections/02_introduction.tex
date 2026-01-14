@@ -1,8 +1,36 @@
 \chapter{Introduction}
 
 \section{Motivation}
-
-
+Your motivation text here.
 
 \section{Thesis Outline}
+Your outline text here.
+
+\section{NOTES}
+~\cite{sayyari2014}
+\begin{itemize}
+\item Anzahl der Traininsgdaten hat enorme Auswirkung auf die accuracy des Modells.   
+\item Kleine Datensätze können zu overfitting oder schlechten generalisierungen führen.  
+\item Overfitting ist ein häufiges Porblem beim Ml, vorallem bei unausgeglichenen Datensätzen.  
+\item Die Anzahl der Mikrobiomproben ist im Vergleich zu Anwendungen wie Bild- und Spracherkennung relativ gering.  
+\item die Verteilung der Labels entspricht häufig nicht einmal annähernd der Gesamtpopulation   
+    \item (z. B. sind gezielte Datensätze oft im Krankheitszustand überrepräsentiert und enthalten zu wenige gesunde Proben).  
+\item Verzerrungen werden durch die natürliche Variabilität des Mikrobioms und die Autokorrelation zwischen Labels aufgrund zahlreicher versteckter oder Störvariablen weiter verstärkt.  
+\item Das ultimative Ziel sollte daher die Sammlung von mehr (und weniger verzerrten) gelabelten Proben für das Training sein – eine Aufgabe, die nur langsam voranschreiten wird.  
+\item Oftmals sind die Datensätze aus verschiedenen Laboren/Studien Zusammengefasst.  
+\item Lösung könnte die Data augmentation sein. 
+    \item Erstellung von künstlichen Daten.  
+    \item Beispielsweise versuchen zwei weit verbreitete Methoden, SMOTE (Chawla et al., 2002) und ADASYN (He et al., 2008), Verzerrungen zu reduzieren, die durch unausgewogene Verteilungen von Labels entstehen, indem sie ein k-NN-Clustering der Beispiele durchführen und Punkte im selben Cluster zusammenfassen.  
+\item In dem Paper stellen sie TADA vor:  
+\item TADA basiert auf zwei Hauptideen:   
+\item (i) Jede beobachtete Probe erfasst das zugrundeliegende Mikrobiom nur unvollkommen, weshalb leicht Variationen der Probe beobachtet werden könnten.   
+\item (ii) Solche Variationen werden durch die phylogenetischen Beziehungen zwischen den Arten eingeschränkt (Matsen, 2015), welche die Sequenzähnlichkeit und die mikrobielle Diversität bestimmen (O’Dwyer et al., 2012; von Mering et al., 2007).  
+\item TADA generiert daher neue Proben unter Berücksichtigung der evolutionären Beziehungen zwischen Organismen.  
+\item Darüber hinaus beschränken wir uns nicht nur auf die Erhöhung der Probenanzahl.  
+\item Wie wir zeigen werden, ist es entscheidend, Ungleichgewichte und Verzerrungen in den Trainingsdaten zu beheben.  
+\item Bei der Entscheidung, welche Stichproben hinzugefügt werden sollen, kann TADA auch Ungleichgewichte in den Daten hinsichtlich beobachteter und verborgener Variablen beseitigen (die wir mithilfe von Clustering approximieren).  
+\item Wir testen TADA an zwei Datensätzen mit verschiedenen Verzerrungen, die dem Trainingsdatensatz hinzugefügt wurden.   
+\item Wir zeigen, dass zwei führende ML-Modelle (Random Forests und neuronale Netze) bei unausgewogenen und verzerrten Stichproben keine guten Ergebnisse liefern.   
+\item Wir zeigen auch, dass die Datenerweiterung die Genauigkeit verbessert, geringfügig, aber signifikant bei ausgewogenen Datensätzen und deutlich bei unausgewogenen Trainingsdatensätzen.  
+\end{itemize}
 
