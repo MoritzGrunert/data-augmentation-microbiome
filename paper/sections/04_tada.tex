@@ -1,0 +1,32 @@
+\chapter{Tada}
+~\cite{sayyari2014}
+\begin{itemize}
+\item TADA modelliert zwei Arten von Variationen.
+    \begin{itemize}
+        \item (i) True variation (TV): (biologische variation) Aufgrund biologischer Prozesse variiert die wahre mikrobielle Zusammensetzung zwischen Individuen, selbst wenn sie ähnliche Merkmale aufweisen (z. B. gesund/krank).
+        \item (ii) Sampling variation (SV): (technische variation) Aufgrund von Probenahme-, DNA-Extraktions- und Sequenzierungstechniken variiert die gemessene mikrobielle Zusammensetzung selbst für dieselbe biologische Probe.
+    \end{itemize}
+\item Von den beiden Variationsformen ist die True Variation deutlich schwieriger statistisch zu modellieren.
+\item Störfaktoren sind größtenteils unbekannt, ebenso wie die Ursache natürlicher oder zeitlicher Schwankungen.
+\item Phylogenetische Struktur
+    \begin{itemize}
+        \item Die Mikroorganismen einer Probe sind alle Nachkommen eines gemeinsamen Vorfahren, wie ihr phylogenetischer Baum zeigt.
+        \item ein phylogenetischer Baum kann sowohl die Verwandtschaftsverhältnisse (in seiner Topologie) als auch die Distanz zwischen den Arten darstellen. 
+        \item Enge phylogenetische Beziehungen zwischen OTUs korrespondieren mit Ähnlichkeit im Sequenzraum und möglicherweise auch in funktionellen Rollen.
+    \end{itemize}
+
+\item 2.2.2 Generativ model: mixtures
+    \begin{itemize}
+        \item das oben beschriebene Modell ist eingeschränkt.
+        \item Es ignoriert die Tatsache, dass Individuen mehreren Klassen angehören (deren Identifizierung das Ziel ist) und dass innerhalb jeder Klasse Störfaktoren eine weitere Strukturierung der Stichproben bewirken können.
+        \item Beispielsweise können wir gesunde und kranke Stichproben für unsere Hauptklassen haben, und innerhalb jeder dieser Klassen können die Stichproben weiter nach Alter, Geschlecht, Gewicht oder anderen Faktoren (die möglicherweise nicht bekannt sind) differenziert werden.
+        \item deshalb wird Phänotypstruktur der Stichproben nicht modelliert. Um die Phänotypstruktur zu erfassen, verwenden wir ein Mischungsmodell.
+        \item Im generativen Prozess wird jede Stichprobe zunächst gemäß den Clusterwahrscheinlichkeiten einem Cluster zugeordnet, und anschließend wird das oben beschriebene Verfahren durchgeführt.
+    \end{itemize}
+\item 2.2.3 Data augmentation procedure
+    \begin{itemize}
+        \item Daher verwenden wir das generative Modell nicht für die Inferenz, sondern lediglich als Werkzeug zur Datenerweiterung für das Training von ML-Modellen.
+        \item TADA-SV 
+        \item 
+    \end{itemize}
+\end{itemize}
