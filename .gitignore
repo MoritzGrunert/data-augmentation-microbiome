@@ -22,6 +22,7 @@ htmlcov/
 # Outputs / results (optional)
 outputs/
 results/
+trash/
 
 # LaTeX (only build artefacts)
 paper/**/*.aux
