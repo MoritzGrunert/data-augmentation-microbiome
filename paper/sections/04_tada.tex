@@ -30,3 +30,81 @@
         \item 
     \end{itemize}
 \end{itemize}
+
+\begin{algorithm}[H]
+\caption{DBS (No-Tree-SV): Distribution-Based Sampling}
+\label{alg:dbs}
+\begin{algorithmic}[1]
+\For{each sample $s \in X$}
+    \State $c \leftarrow$ OTU counts of sample $s$
+    \State $N \leftarrow \sum_i c_i$
+
+    \State Estimate relative abundances:
+    \State \hspace{0.5cm} $p \leftarrow \dfrac{c + \alpha}{\sum_i (c_i + \alpha)}$
+    \For{$j = 1$ to $k$}
+        \State Draw synthetic counts:
+        \State \hspace{0.5cm} $c' \sim \text{Multinomial}(N, p)$
+        \State Add $c'$ as a new synthetic sample
+    \EndFor
+\EndFor
+
+\State \Return original samples and all synthetic samples
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{DBS (No-Tree-SV)}
+\begin{algorithmic}
+\For{each sample $s$}
+    \State $p \gets (c + \alpha) / \sum(c + \alpha)$
+    \For{$j = 1$ to $k$}
+        \State $c' \sim \text{Multinomial}(N, p)$
+    \EndFor
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{DBS (No-Tree-SV): Distribution-Based Sampling}
+\label{alg:dbs}
+\begin{algorithmic}[1]
+\Require OTU table $X \in \mathbb{N}^{m \times n}$, number of synthetic samples $k$, smoothing parameter $\alpha$
+\Ensure Augmented OTU table $X'$
+
+\For{each sample $s \in X$}
+    \State $c \leftarrow$ OTU counts of sample $s$
+    \State $N \leftarrow \sum_i c_i$
+    \State Estimate relative abundances:
+    \State \hspace{0.5cm} $p \leftarrow \dfrac{c + \alpha}{\sum_i (c_i + \alpha)}$
+    \For{$j = 1$ to $k$}
+        \State Draw synthetic counts:
+        \State \hspace{0.5cm} $c' \sim \text{Multinomial}(N, p)$
+        \State Add $c'$ as a new synthetic sample
+    \EndFor
+\EndFor
+\State \Return original samples and all synthetic samples
+\end{algorithmic}
+\end{algorithm}
+
+\[
+\mathbf{c} = [10, 20, 30, 40, 50]
+\]
+
+\[
+N = \sum_i c_i = 150
+\]
+
+\[
+\mathbf{p} = \frac{\mathbf{c}}{N}
+           = \left[ \frac{10}{150}, \frac{20}{150}, \frac{30}{150},
+                    \frac{40}{150}, \frac{50}{150} \right]
+           = [0.067, 0.133, 0.200, 0.267, 0.333]
+\]
+
+\[
+\mathbf{c}' \sim \text{Multinomial}(150, \mathbf{p})
+\]
+
+\[
+\mathbf{c}' = [12, 19, 35, 40, 44]
+\]
