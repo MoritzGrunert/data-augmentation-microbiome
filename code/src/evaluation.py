@@ -214,9 +214,9 @@ def run_experiment(
 # ----------------------------
 def parse_args():
     p = argparse.ArgumentParser(description="Evaluate DA methods on microbiome OTU data.")
-    p.add_argument("--data", default="/Users/moritzgrunert/Desktop/Projects/2.Seminar/data_augmentation_microbiome/code/data/data.csv")
-    p.add_argument("--tree", default="/Users/moritzgrunert/Desktop/Projects/2.Seminar/data_augmentation_microbiome/code/data/phylogeny_otu.tre")
-    p.add_argument("--out",  default="/Users/moritzgrunert/Desktop/Projects/2.Seminar/data_augmentation_microbiome/code/results")
+    p.add_argument("--data", default="../data/data.csv")
+    p.add_argument("--tree", default="../data/phylogeny_otu.tre")
+    p.add_argument("--out",  default="../results")
 
     p.add_argument("--reps", type=int, default=20, help="Number of replicates (runs).")
     p.add_argument("--seed", type=int, default=0, help="Base seed (replicate i uses seed+ i).")
