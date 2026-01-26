@@ -22,3 +22,15 @@ source .venv/bin/activate      # macOS / Linux
 # .venv\Scripts\activate       # Windows
 pip install -r requirements.txt
 ```
+
+```
+python evaluation.py --experiment e1 --model rf --reps 20
+```
+
+```
+python evaluation.py --experiment e1 --model lr --reps 20
+```
+
+```
+python evaluation.py --experiment e2 --model lr --reps 20 --reduce-r 194
+```
