@@ -4,7 +4,7 @@
 - `code/`: Code for data augmentation experiments
 - `notebooks/`: Exploratory analysis
 
-### Environment Setup
+## Environment Setup
 
 This project was developed and tested with Python 3.10.
 
