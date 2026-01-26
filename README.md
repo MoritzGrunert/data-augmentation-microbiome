@@ -10,11 +10,11 @@ This project was developed and tested with Python 3.10.
 
 Using Conda (recommended)
 
+### Setup
+
 ```bash
-conda create -n microbiome-da python=3.10
-conda activate microbiome-da
-pip install -r requirements.txt
-```
+conda env create -f environment.yml
+conda activate da_micro
 
 Alternative: without Conda
 
