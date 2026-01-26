@@ -13,7 +13,6 @@ class NoTreeSV:
     
     Optional:
       - smoothing (Laplace / pseudocount) verhindert p_i=0
-      - dirichlet_strength: zusätzliche "true variation" light (optional)
     """
 
     def __init__(
@@ -23,22 +22,19 @@ class NoTreeSV:
         random_state: int = 0,
         sampling_strategy: str = "auto",
         smoothing: float = 0.0,
-        dirichlet_strength: Optional[float] = None,
     ) -> None:
         self.k = k
         self.q = q
         self.random_state = random_state
         self.sampling_strategy = sampling_strategy
         self.smoothing = float(smoothing)
-        self.dirichlet_strength = dirichlet_strength
         self.meta = None
 
     def fit_resample(self, X: pd.DataFrame, y: pd.Series) -> Tuple[pd.DataFrame, pd.Series]:
         if self.sampling_strategy == "auto":
             X_aug, meta = notree_sv_augment(
                 X, k=self.k, seed=self.random_state,
-                smoothing=self.smoothing,
-                dirichlet_strength=self.dirichlet_strength
+                smoothing=self.smoothing
             )
             # Label wird vom Source-Sample geerbt
             y_aug = meta.set_index("sample_id")["source"].map(y)
@@ -48,15 +44,13 @@ class NoTreeSV:
         if self.sampling_strategy == "balance":
             return notree_sv_balance(
                 X, y, seed=self.random_state,
-                smoothing=self.smoothing,
-                dirichlet_strength=self.dirichlet_strength
+                smoothing=self.smoothing
             )
 
         if self.sampling_strategy == "balance++":
             return notree_sv_balance_plus(
                 X, y, q=self.q, seed=self.random_state,
-                smoothing=self.smoothing,
-                dirichlet_strength=self.dirichlet_strength
+                smoothing=self.smoothing
             )
 
         raise ValueError(f"Unknown sampling_strategy: {self.sampling_strategy}")
@@ -66,7 +60,6 @@ def _sample_multinomial_counts(
     counts: np.ndarray,
     rng: np.random.Generator,
     smoothing: float = 0.0,
-    dirichlet_strength: Optional[float] = None,
 ) -> np.ndarray:
     """
     counts: (d,) non-negative counts
@@ -88,17 +81,6 @@ def _sample_multinomial_counts(
     else:
         p = p / p_sum
 
-    # Optional: extra Variation über Dirichlet (ähnlich "true variation light")
-    # - dirichlet_strength klein => mehr Streuung
-    # - groß => p bleibt nahe am Original
-    if dirichlet_strength is not None:
-        if dirichlet_strength <= 0:
-            raise ValueError("dirichlet_strength must be > 0 or None.")
-        alpha = p * dirichlet_strength
-        # Dirichlet braucht strikt >0:
-        alpha = np.clip(alpha, 1e-12, None)
-        p = rng.dirichlet(alpha)
-
     return rng.multinomial(N, p).astype(int)
 
 
@@ -107,7 +89,6 @@ def notree_sv_augment(
     k: int = 5,
     seed: int = 0,
     smoothing: float = 0.0,
-    dirichlet_strength: Optional[float] = None,
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     rng = np.random.default_rng(seed)
     otu_ids = list(X.columns)
@@ -129,7 +110,6 @@ def notree_sv_augment(
             syn = _sample_multinomial_counts(
                 base, rng,
                 smoothing=smoothing,
-                dirichlet_strength=dirichlet_strength
             )
             new_id = f"{sid}__noTreeSV{j}"
             rows.append(syn)
@@ -146,7 +126,6 @@ def notree_sv_balance(
     y: pd.Series,
     seed: int = 0,
     smoothing: float = 0.0,
-    dirichlet_strength: Optional[float] = None,
 ) -> Tuple[pd.DataFrame, pd.Series]:
     rng = np.random.default_rng(seed)
     X = X.copy()
@@ -175,8 +154,7 @@ def notree_sv_balance(
             base = X.loc[src_id].values.astype(float)
             syn = _sample_multinomial_counts(
                 base, rng,
-                smoothing=smoothing,
-                dirichlet_strength=dirichlet_strength
+                smoothing=smoothing
             )
             new_id = f"{src_id}__noTreeSV_bal_{j}"
             new_rows.append(syn)
@@ -195,7 +173,6 @@ def notree_sv_balance_plus(
     q: int = 2,
     seed: int = 0,
     smoothing: float = 0.0,
-    dirichlet_strength: Optional[float] = None,
 ) -> Tuple[pd.DataFrame, pd.Series]:
     rng = np.random.default_rng(seed)
     X = X.copy()
@@ -225,8 +202,7 @@ def notree_sv_balance_plus(
             base = X.loc[src_id].values.astype(float)
             syn = _sample_multinomial_counts(
                 base, rng,
-                smoothing=smoothing,
-                dirichlet_strength=dirichlet_strength
+                smoothing=smoothing
             )
             new_id = f"{src_id}__noTreeSV_balpp_{j}"
             new_rows.append(syn)
