@@ -1,36 +1,16 @@
 \chapter{Introduction}
 
 \section{Motivation}
-Your motivation text here.
+In recent years, machine learning (ML) methods have demonstrated an advanced capacity to capture complex relationships. Nevertheless, the complex nature of microbiome data makes it challenging for conventional machine learning (ML) classification models to achieve suitable performance~\cite{sayyari2014}.
+The microbiome is defined as a collective of microorganisms that inhabit a specific body site or environment~\cite{sharma2024,ursell2012}.
+In addition, the number of training samples for the machine learning (ML) model can have a substantial impact on the model's accuracy. A limited dataset can result in overfitting and suboptimal generalization~\cite{sayyari2014,sharma2024}.
+This issue is particularly salient in the context of microbiome datasets, which their are often limited in size, this can result in a higher number of features compared to the number of samples. Additionally, these datasets are frequently imbalanced and biased, a circumstance that can also compromise the accuracy of the model~\cite{sayyari2014,sharma2024}.
+
+A potential solution to avoid a suboptimal model caused by an an unfavorable dataset, could be the implementation of data augmentation techniques. The concept of data augmentation involves the generation of synthetic samples based on real samples and adding these new samples to the training data~\cite{sayyari2014}.
+Two widely used data augmentation methods for handling class imbalance are SMOTE~\cite{chawla2002} and ADASYN~\cite{he2008}. Both approaches aim to mitigate biases introduced by imbalanced class distributions by generating synthetic samples for the minority class. This is achieved employing a k-nearest neighbors (k-NN) strategy that interpolates between similar minority-class samples. However, these two methods do not attempt to capture domain knowledge, such as the relationship between microorganisms~\cite{sayyari2014}.
+In this paper, we examine more closely two Data Augmentaion techniques. The Tree-based Associative Data Augmentation (TADA) approach was proposed by Sayyari et al. in 2014. TADA aims to generate new samples by considering the evolutionary relationships between organisms using a phylogenetic tree. A phylogenetic tree is a representation of evolutionary relationships among species and the branches representing the evolutionary distance between them~\cite{sayyari2014}.
+The objective of this study is to empirically evaluate the efficacy of various data augmentation approaches, including SMOTE, ADASYN, TADA, and DBS, on a single dataset characterized by distinct training data distributions. The study utilized two distinct classification algorithms: random forest and logistic regression. The findings demonstrate that all augmentation methods enhance model performance, but TADA and DBS show more efficacy.
 
 \section{Thesis Outline}
 Your outline text here.
-
-\section{NOTES}
-~\cite{sayyari2014}
-\begin{itemize}
-\item Anzahl der Traininsgdaten hat enorme Auswirkung auf die accuracy des Modells.   
-\item Kleine Datensätze können zu overfitting oder schlechten generalisierungen führen.  
-\item Overfitting ist ein häufiges Porblem beim Ml, vorallem bei unausgeglichenen Datensätzen.  
-\item Die Anzahl der Mikrobiomproben ist im Vergleich zu Anwendungen wie Bild- und Spracherkennung relativ gering.  
-\item die Verteilung der Labels entspricht häufig nicht einmal annähernd der Gesamtpopulation   
-    \item (z. B. sind gezielte Datensätze oft im Krankheitszustand überrepräsentiert und enthalten zu wenige gesunde Proben).  
-\item Verzerrungen werden durch die natürliche Variabilität des Mikrobioms und die Autokorrelation zwischen Labels aufgrund zahlreicher versteckter oder Störvariablen weiter verstärkt.  
-\item Das ultimative Ziel sollte daher die Sammlung von mehr (und weniger verzerrten) gelabelten Proben für das Training sein – eine Aufgabe, die nur langsam voranschreiten wird.  
-\item Oftmals sind die Datensätze aus verschiedenen Laboren/Studien Zusammengefasst.  
-\item Lösung könnte die Data augmentation sein. 
-    \item Erstellung von künstlichen Daten.  
-    \item Beispielsweise versuchen zwei weit verbreitete Methoden, SMOTE (Chawla et al., 2002) und ADASYN (He et al., 2008), Verzerrungen zu reduzieren, die durch unausgewogene Verteilungen von Labels entstehen, indem sie ein k-NN-Clustering der Beispiele durchführen und Punkte im selben Cluster zusammenfassen.  
-\item In dem Paper stellen sie TADA vor:  
-\item TADA basiert auf zwei Hauptideen:   
-\item (i) Jede beobachtete Probe erfasst das zugrundeliegende Mikrobiom nur unvollkommen, weshalb leicht Variationen der Probe beobachtet werden könnten.   
-\item (ii) Solche Variationen werden durch die phylogenetischen Beziehungen zwischen den Arten eingeschränkt (Matsen, 2015), welche die Sequenzähnlichkeit und die mikrobielle Diversität bestimmen (O’Dwyer et al., 2012; von Mering et al., 2007).  
-\item TADA generiert daher neue Proben unter Berücksichtigung der evolutionären Beziehungen zwischen Organismen.  
-\item Darüber hinaus beschränken wir uns nicht nur auf die Erhöhung der Probenanzahl.  
-\item Wie wir zeigen werden, ist es entscheidend, Ungleichgewichte und Verzerrungen in den Trainingsdaten zu beheben.  
-\item Bei der Entscheidung, welche Stichproben hinzugefügt werden sollen, kann TADA auch Ungleichgewichte in den Daten hinsichtlich beobachteter und verborgener Variablen beseitigen (die wir mithilfe von Clustering approximieren).  
-\item Wir testen TADA an zwei Datensätzen mit verschiedenen Verzerrungen, die dem Trainingsdatensatz hinzugefügt wurden.   
-\item Wir zeigen, dass zwei führende ML-Modelle (Random Forests und neuronale Netze) bei unausgewogenen und verzerrten Stichproben keine guten Ergebnisse liefern.   
-\item Wir zeigen auch, dass die Datenerweiterung die Genauigkeit verbessert, geringfügig, aber signifikant bei ausgewogenen Datensätzen und deutlich bei unausgewogenen Trainingsdatensätzen.  
-\end{itemize}
 
