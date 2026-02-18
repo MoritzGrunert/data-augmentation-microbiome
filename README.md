@@ -37,4 +37,4 @@ python evaluation.py --experiment e1 --model lr --reps 20
 python evaluation.py --experiment e2 --model lr --reps 20 --reduce-r 194
 ```
 
-test
+test2
